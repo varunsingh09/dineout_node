@@ -1,0 +1,28 @@
+<div class="col-md-4 col-md-offset-2">
+	<h2>Restaurant</h2>
+	<form action="/restaurants/{{r_id}}/edit?_method=PUT" method="post" class="form">
+		<div class="form-group">
+			<label for="profile_name">Profile Name</label>
+			<input type="text" name="profile_name" id="profile_name" value="{{profile_name}}" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="state_name">State Name</label>
+			<input type="text" name="state_name" id="state_name" value="{{state_name}}" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="city_name">City Name</label>
+			<input type="text" name="city_name" id="city_name" value="{{city_name}}" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="area_name">Area Name</label>
+			<input type="text" name="area_name" id="area_name" value="{{area_name}}" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="locality_name">Locality Name</label>
+			<input type="text" name="locality_name" id="locality_name" value="{{locality_name}}" class="form-control">
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit">Update</button>
+		</div>
+	</form>
+</div>

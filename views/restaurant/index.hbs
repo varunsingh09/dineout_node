@@ -1,0 +1,40 @@
+<div class="col-md-10 col-md-offset-1">
+	<h2>Restaurant Listing <a href="/restaurants/new" class="btn btn-primary text-right btn-sm">Add Restaurant</a></h2>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Restaurant</th>
+				<th>Category</th>
+				<th>Offers</th>
+				<th>Events</th>
+				<th>Remarks</th>
+				<th>Options</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each restaurants}}
+				<tr>
+					<td> <a href="/restaurants/{{dataValues.r_id}}/edit" class="btn-success"><b>{{dataValues.profile_name}}</b>
+					<br>{{dataValues.area_name}}</a>
+					<br>{{dataValues.locality_name}}
+					<br>{{dataValues.city_name}}
+					<br>{{dataValues.state_name}}
+					<br>Id - {{dataValues.r_id}}
+					</td>
+				<td>
+				
+				({{dataValues.payment_mode}})</td>
+					<td>{{dataValues.r_id}}</td>
+					<td>{{dataValues.r_id}}</td>
+					<td>{{dataValues.r_id}}</td>
+					<td>
+						<a href="/restaurants/{{dataValues.d_id}}/detail" class="btn btn-success btn-sm">view</a>
+						<a href="/restaurants/{{dataValues.d_id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+						<a href="/restaurants/{{dataValues.d_id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this restaurant?')">Delete</a>
+					</td>
+					
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>	

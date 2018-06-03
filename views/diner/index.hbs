@@ -1,0 +1,31 @@
+<div class="col-md-10 col-md-offset-1">
+	<h2>Diner Listing <a href="/diners/new" class="btn btn-primary text-right btn-sm">Add Diner</a></h2>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nama</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Created On</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each diners}}
+				<tr>
+					<td>{{dataValues.d_id}}</td>
+					<td>{{dataValues.d_first_name}} {{dataValues.d_last_name}}</td>
+					<td>{{dataValues.d_email}}</td>
+					<td>{{dataValues.d_phone}}</td>
+					<td>{{dataValues.d_dt}}</td>
+					<td>
+						<a href="/diners/{{dataValues.d_id}}/detail" class="btn btn-success btn-sm">view</a>
+						<a href="/diners/{{dataValues.d_id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+						<a href="/diners/{{dataValues.d_id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this diner?')">Delete</a>
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>	
