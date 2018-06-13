@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
     
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+       // Diner.hasOne(models.notificationMaster, { as: 'notificationMaster', foreignKey: 'diner_id' });
       }
     }
   });

@@ -7,7 +7,7 @@ const path = require('path');
 
 const models = require('../models');
 const Diner = models.Diner;
-
+const Image = models.Image;
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -37,8 +37,8 @@ router.get('/:id/detail', (req, res) => {
 			res.render('error', err)
 		})
 })
-router.get('/:id/edit', (req, res) => {
-	Diner.findById(req.params.id)
+router.get('/:d_id/edit', (req, res) => {
+	Diner.findById(req.params.d_id)
 		.then((diner) => {
 			res.render('diner/edit', diner.dataValues)
 		}).catch((err) => {
@@ -47,10 +47,11 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.post('/', upload.single('photo'), (req, res) => {
-	User.create({
-		first_name: req.body.firstname,
-		last_name: req.body.lastname,
-		email: req.body.email,
+	Diner.create({
+		d_first_name: req.body.firstname,
+		d_last_name: req.body.lastname,
+		d_email: req.body.email,
+		d_phone: req.body.phone,
 		photo: !req.file ? 'placeholder.jpg' : req.file.filename
 	}).then((user) => {
 		res.redirect('/diners')
@@ -59,5 +60,51 @@ router.post('/', upload.single('photo'), (req, res) => {
 	})
 })
 
+router.put('/:id/edit', upload.single('photo'), (req, res) => {
+	const diner = {
+		d_first_name: req.body.firstname,
+		d_last_name: req.body.lastname,
+		d_email: req.body.email
+	}
+	// if user upload new photo, then remove old photo and save photo's name in database
+	if (req.file) {
+		// if old photo exists (old photo not empty) then unlink / remove the photo in directory
+		if (req.body.old_photo !== '')
+			fs.unlink(`uploads/photo/${req.body.old_photo}`);
+		diner.photo = req.file.filename
+	}
+	Diner.update(diner, {
+		where: {
+			d_id: req.params.id
+		}
+	}).then((diner) => {
+		res.redirect('/diners')
+	}).catch((err) => {
+		res.render('error', err);
+	})
+})
+
+router.get('/new', (req, res) => {
+	console.log('aa')
+	res.render('diner/create');
+})
+
+
+router.get('/:id/delete', (req, res) => {console.log(req.params.id)
+	Diner.findById(req.params.id)
+		.then((diner) => {
+				Diner.destroy({
+					where: {
+						d_id: req.params.id
+					}
+				}).then(() => {
+					res.redirect('/diners')
+				}).catch((err) => {
+					res.render('error', err)
+				})
+		}).catch((err) => {
+			res.render('error', err)
+		})
+})
 
 module.exports = router;
